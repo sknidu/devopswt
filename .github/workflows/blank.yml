@@ -15,23 +15,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-
-  # Adding a test
-  test:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps to validate the codebase
-    steps:
-      # Checks out the repository
-      - uses: actions/checkout@v4
-
-      # Run a test command
-      - name: Run tests
-        run: |
-          echo Running tests...
-          script: echo ${{ parameters.runDevTest }} 
           
   # This workflow contains a single job called "build"
   build:
@@ -54,4 +37,18 @@ jobs:
           echo test, and deploy your project.
 
 
+  # Adding a test
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
 
+    # Steps to validate the codebase
+    steps:
+      # Checks out the repository
+      - uses: actions/checkout@v4
+
+      # Run a test command
+      - name: Run tests
+        run: |
+          echo Running tests...
+          script: echo ${{ parameters.runDevTest }} 
