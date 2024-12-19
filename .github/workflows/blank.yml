@@ -31,7 +31,7 @@ jobs:
       - name: Run tests
         run: |
           echo Running tests...
-          echo All tests passed successfully!
+          script: echo ${{ parameters.runDevTest }} 
           
   # This workflow contains a single job called "build"
   build:
