@@ -16,8 +16,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  # Test job to validate the codebase
-  test:
+  # calculate time
+  checktime:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -36,6 +36,29 @@ jobs:
           END_TIME=$(date +%s)
           echo "Test runtime: $((END_TIME-START_TIME)) seconds"
           echo "test_time=$((END_TIME-START_TIME))" >> $GITHUB_ENV
+
+
+   # 
+  timecondition: 
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps to validate the codebase
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+
+      # Run a test command and capture runtime
+      - name: Run tests and capture runtime
+        id: test-runtime-even-or-uneven
+        run: |
+          if (( ${test_time} % 2 == 0 )); then
+          echo " runtime ${test_time} is even"
+          exit 0
+          else
+          echo " runtime ${test_time} is uneven"
+          exit 1
+        
           
   # This workflow contains a single job called "build"
   build:
@@ -56,6 +79,7 @@ jobs:
         run: |
           echo "Building the project..."
           echo "Previous test job runtime: ${test_time} seconds"
+          echo script 
 
 
 
